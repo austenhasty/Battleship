@@ -1,12 +1,13 @@
 import java.util.Scanner;
 
 public class Battleship {
-    private static String[][] sea = new String[10][10]
+    private static String[][] sea = new String[10][10];
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("****Welcome to Battleships Game****");
         System.out.println();
-        System.out.print(drawSea());
+        System.out.println("Right now, the sea is empty.");
+        drawSea();
 
 
     }
@@ -20,7 +21,10 @@ public class Battleship {
                 System.out.print(sea[i][j]);
             }
             System.out.print("| " + i);
+            System.out.println();
         }
-        System.out.println("   0123456789")
+        System.out.println("   0123456789");
     }
+
+
 }
