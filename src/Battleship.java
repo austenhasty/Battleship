@@ -8,8 +8,10 @@ public class Battleship {
         System.out.println();
         System.out.println("Right now, the sea is empty.");
         drawSea();
-
-
+        System.out.println();
+        System.out.println();
+        System.out.println("Player 1 please prepare to deploy your ships: ");
+        userShips();
     }
 
     public static void drawSea() {
@@ -24,6 +26,27 @@ public class Battleship {
             System.out.println();
         }
         System.out.println("   0123456789");
+    }
+
+    public static void userShips() {
+        Scanner input = new Scanner(System.in);
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Please enter x coordinate for ship "+ i+1);
+            int x = input.nextInt();
+            if (x < 0 || x > 9) {
+                System.out.println("Invalid choice. Please enter a number from 0-9");
+                x = input.nextInt();
+            }
+            System.out.println("Please enter a y coordinate for ship "+ i+1);
+            int y = input.nextInt();
+            if (y < 0 || y > 9) {
+                System.out.println("Invalid choice. Please enter a number from 0-9");
+                y = input.nextInt();
+            }
+            sea[x][y] = "@"
+        }
+        System.out.println("The Player has deployed their ship!");
+        drawSea();
     }
 
 
