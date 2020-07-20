@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Battleship {
     private static String[][] sea = new String[10][10];
@@ -45,7 +46,23 @@ public class Battleship {
             }
             sea[x][y] = "@"
         }
-        System.out.println("The Player has deployed their ship!");
+        System.out.println("The Player has deployed their ships!");
+        drawSea();
+    }
+
+    public static void computerShips() {
+        Random r = new Random();
+        System.out.println("The computer is deploying its ships");
+        for (int i = 0; i < 5; i++) {
+            int x = r.nextInt(10);
+            int y = r.nextInt(10);
+            System.out.println("The computer has deployed ship "+ i+1);
+            while (!sea[x][y].equals(" ")) {
+                x = r.nextInt();
+                y = r.nextInt();
+            }
+        }
+        System.out.println("The Computer has deployed its ships!");
         drawSea();
     }
 
