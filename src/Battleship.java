@@ -1,25 +1,31 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Battleship {
     private static String[][] sea = new String[10][10];
+    public static ArrayList<String> playerSea = new ArrayList<String>();
+    public static ArrayList<ArrayList<String>> compSea = new ArrayList<ArrayList<String>>(10);
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("****Welcome to Battleships Game****");
         System.out.println();
         System.out.println("Right now, the sea is empty.");
         drawSea();
-        System.out.println();
-        System.out.println();
-        System.out.println("Player 1 please prepare to deploy your ships: ");
-        userShips();
+        generateCompBoard();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("Player 1 please prepare to deploy your ships: ");
+//        userShips();
+//        computerShips();
     }
 
     public static void drawSea() {
         System.out.println("   0123456789");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < sea.length; i++) {
             System.out.print(i + " |");
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < sea[i].length; j++) {
                 sea[i][j] = " ";
                 System.out.print(sea[i][j]);
             }
@@ -44,10 +50,30 @@ public class Battleship {
                 System.out.println("Invalid choice. Please enter a number from 0-9");
                 y = input.nextInt();
             }
-            sea[x][y] = "@"
+            sea[x][y] = "@";
         }
         System.out.println("The Player has deployed their ships!");
         drawSea();
+    }
+
+    public static void generateCompBoard() {
+        System.out.println("   0123456789");
+        for (int i = 0; i < compSea.size(); i++) {
+            System.out.print(i + " |");
+            ArrayList<String> comp = new ArrayList<String>(10);
+//            compSea.add(comp);
+//            comp.add(sea[i]);
+//            compSea.add(comp);
+            for (int j = 0; j < compSea.get(i).size(); j++) {
+                compSea.add(comp);
+                comp.add(" ");
+//                compSea.add(comp);
+                System.out.print(comp);
+            }
+            System.out.print("| " + i);
+            System.out.println();
+        }
+        System.out.println("   0123456789");
     }
 
     public static void computerShips() {
@@ -57,13 +83,13 @@ public class Battleship {
             int x = r.nextInt(10);
             int y = r.nextInt(10);
             System.out.println("The computer has deployed ship "+ i+1);
-            while (!sea[x][y].equals(" ")) {
-                x = r.nextInt();
-                y = r.nextInt();
-            }
+//            while (!compSea[x][y].equals(" ")) {
+//                x = r.nextInt();
+//                y = r.nextInt();
+//            }
         }
         System.out.println("The Computer has deployed its ships!");
-        drawSea();
+//        drawSea();
     }
 
 
