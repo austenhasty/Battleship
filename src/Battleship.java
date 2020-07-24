@@ -5,8 +5,9 @@ import java.util.List;
 
 public class Battleship {
     private static String[][] sea = new String[10][10];
-    public static ArrayList<String> playerSea = new ArrayList<String>();
-    public static ArrayList<ArrayList<String>> compSea = new ArrayList<ArrayList<String>>(10);
+    public static String[][] comp = new String[10][10];
+//    public static ArrayList<String> playerSea = new ArrayList<String>();
+//    public static ArrayList<ArrayList<String>> compSea = new ArrayList<ArrayList<String>>(10);
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("****Welcome to Battleships Game****");
@@ -18,7 +19,7 @@ public class Battleship {
 //        System.out.println();
 //        System.out.println("Player 1 please prepare to deploy your ships: ");
 //        userShips();
-//        computerShips();
+        computerShips();
     }
 
     public static void drawSea() {
@@ -48,6 +49,19 @@ public class Battleship {
         System.out.println("   0123456789");
     }
 
+    public static void generateCompBoard() {
+        for (int i = 0; i < comp.length; i++) {
+            System.out.print(i + " |");
+            for (int j = 0; j < sea[i].length; j++) {
+//                sea[i][j] = comp[i][j];
+                comp[i][j] = " ";
+                System.out.print(comp[i][j]);
+            }
+            System.out.print("| " + i);
+            System.out.println();
+        }
+    }
+
     public static void userShips() {
         Scanner input = new Scanner(System.in);
         for (int i = 0; i < 5; i++) {
@@ -69,35 +83,15 @@ public class Battleship {
         printSea();
     }
 
-//    public static void generateCompBoard() {
-//        System.out.println("   0123456789");
-//        for (int i = 0; i < compSea.size(); i++) {
-//            System.out.print(i + " |");
-//            ArrayList<String> comp = new ArrayList<String>(10);
-//            compSea.add(comp);
-//            comp.add(sea[i]);
-//            compSea.add(comp);
-//            for (int j = 0; j < compSea.get(i).size(); j++) {
-//                compSea.add(comp);
-//                comp.add(" ");
-//                compSea.add(comp);
-//                System.out.print(comp);
-//            }
-//            System.out.print("| " + i);
-//            System.out.println();
-//        }
-//        System.out.println("   0123456789");
-//    }
-
     public static void computerShips() {
         Random r = new Random();
         System.out.println("The computer is deploying its ships");
         for (int i = 0; i < 5; i++) {
-            int x = r.nextInt(10);
-            int y = r.nextInt(10);
-            System.out.println("The computer has deployed ship "+ (i+1));
+            int x = r.nextInt(9);
+            int y = r.nextInt(9);
             sea[x][y] = "#";
-            while (!sea[x][y].equals(" ")) {
+            System.out.println("The computer has deployed ship "+ (i+1));
+            while (!comp[x][y].equals(" ")) {
                 x = r.nextInt();
                 y = r.nextInt();
             }
