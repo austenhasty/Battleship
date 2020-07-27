@@ -51,15 +51,28 @@ public class Battleship {
 
     public static void generateCompBoard() {
         for (int i = 0; i < comp.length; i++) {
-            System.out.print(i + " |");
+//            System.out.print(i + " |");
             for (int j = 0; j < sea[i].length; j++) {
 //                sea[i][j] = comp[i][j];
                 comp[i][j] = " ";
+//                System.out.print(comp[i][j]);
+            }
+//            System.out.print("| " + i);
+//            System.out.println();
+        }
+    }
+
+    public static void printCompSea() {
+        System.out.println("   0123456789");
+        for (int i = 0; i < comp.length; i++) {
+            System.out.print(i + " |");
+            for (int j = 0; j < comp[i].length; j++) {
                 System.out.print(comp[i][j]);
             }
             System.out.print("| " + i);
             System.out.println();
         }
+        System.out.println("   0123456789");
     }
 
     public static void userShips() {
@@ -87,17 +100,17 @@ public class Battleship {
         Random r = new Random();
         System.out.println("The computer is deploying its ships");
         for (int i = 0; i < 5; i++) {
-            int x = r.nextInt(9);
-            int y = r.nextInt(9);
-            sea[x][y] = "#";
+            int x = r.nextInt(10);
+            int y = r.nextInt(10);
+            comp[x][y] = "#";
             System.out.println("The computer has deployed ship "+ (i+1));
             while (!comp[x][y].equals(" ")) {
-                x = r.nextInt();
-                y = r.nextInt();
+                x = r.nextInt(10);
+                y = r.nextInt(10);
             }
         }
         System.out.println("The Computer has deployed its ships!");
-        printSea();
+        printCompSea();
     }
 
 
