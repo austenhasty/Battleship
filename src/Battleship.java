@@ -114,7 +114,40 @@ public class Battleship {
     }
 
     public static void battle() {
+        Scanner input = new Scanner(System.in);
+        int compShips = 5;
+        int userShips = 5;
+        boolean userTurn = true;
+        System.out.println("It's time for battle! Player, you will go first: ");
+        while (userTurn) {
+            System.out.println("Please select an x coordinate for your guess: ");
+            int px = input.nextInt();
+            System.out.println("Please select a y coordinate for your guess: ");
+            int py = input.nextInt();
 
+            if (sea[px][py].equals("#")) {
+                System.out.println("Direct hit! You have sunk one of the Computer's ships!");
+                compShips--;
+                System.out.println("The Computer has "+ compShips +" ships left.");
+                userTurn = false;
+                sea[px][py].equals("!");
+                printSea();
+            }
+            else if (sea[px][py].equals("@")) {
+                System.out.println("Oh no! You sunk your own ship!");
+                userShips--;
+                System.out.println("Player has "+ userShips +" ships left.");
+                userTurn = false;
+                sea[px][py].equals("X");
+                printSea();
+            }
+            else {
+                System.out.println("Oops! It looks like you missed! Better luck next time.");
+                userTurn = false;
+                sea[px][py].equals("-");
+                printSea();
+            }
+        }
     }
 
 }
