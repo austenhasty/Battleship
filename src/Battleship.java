@@ -14,11 +14,11 @@ public class Battleship {
         System.out.println();
         System.out.println("Right now, the sea is empty.");
         drawSea();
-        generateCompBoard();
-//        System.out.println();
-//        System.out.println();
-//        System.out.println("Player 1 please prepare to deploy your ships: ");
-//        userShips();
+//        generateCompBoard();
+        System.out.println();
+        System.out.println();
+        System.out.println("Player 1 please prepare to deploy your ships: ");
+        userShips();
         computerShips();
     }
 
@@ -49,7 +49,7 @@ public class Battleship {
         System.out.println("   0123456789");
     }
 
-    public static void generateCompBoard() {
+ /*   public static void generateCompBoard() {
         for (int i = 0; i < comp.length; i++) {
 //            System.out.print(i + " |");
             for (int j = 0; j < sea[i].length; j++) {
@@ -60,9 +60,9 @@ public class Battleship {
 //            System.out.print("| " + i);
 //            System.out.println();
         }
-    }
+    } */
 
-    public static void printCompSea() {
+ /*   public static void printCompSea() {
         System.out.println("   0123456789");
         for (int i = 0; i < comp.length; i++) {
             System.out.print(i + " |");
@@ -73,7 +73,7 @@ public class Battleship {
             System.out.println();
         }
         System.out.println("   0123456789");
-    }
+    } */
 
     public static void userShips() {
         Scanner input = new Scanner(System.in);
@@ -102,16 +102,19 @@ public class Battleship {
         for (int i = 0; i < 5; i++) {
             int x = r.nextInt(10);
             int y = r.nextInt(10);
-            comp[x][y] = "#";
+            sea[x][y] = "#";
             System.out.println("The computer has deployed ship "+ (i+1));
-            while (!comp[x][y].equals(" ")) {
+            while (!sea[x][y].equals(" ")) {
                 x = r.nextInt(10);
                 y = r.nextInt(10);
             }
         }
         System.out.println("The Computer has deployed its ships!");
-        printCompSea();
+        printSea();
     }
 
+    public static void battle() {
+
+    }
 
 }
