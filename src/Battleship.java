@@ -130,7 +130,7 @@ public class Battleship {
                 compShips--;
                 System.out.println("The Computer has "+ compShips +" ships left.");
                 userTurn = false;
-                sea[px][py].equals("!");
+                sea[px][py] = "!";
                 printSea();
             }
             else if (sea[px][py].equals("@")) {
@@ -138,13 +138,44 @@ public class Battleship {
                 userShips--;
                 System.out.println("Player has "+ userShips +" ships left.");
                 userTurn = false;
-                sea[px][py].equals("X");
+                sea[px][py] = "X";
                 printSea();
             }
             else {
                 System.out.println("Oops! It looks like you missed! Better luck next time.");
                 userTurn = false;
-                sea[px][py].equals("-");
+                sea[px][py] = "-";
+                printSea();
+            }
+        }
+        while (!userTurn) {
+            Random n = new Random();
+            System.out.println("It's time for the Computer to take their shot!");
+            System.out.println();
+            int x = n.nextInt(10);
+            int y = n.nextInt(10);
+            System.out.println("The computer chose ("+ x +","+ y +").");
+
+            if (sea[x][y].equals("@")) {
+                System.out.println("Direct hit! The Player has lost a ship!");
+                userShips--;
+                System.out.println("Player has "+ userShips +" ships left.");
+                userTurn = true;
+                sea[x][y] = "X";
+                printSea();
+            }
+            else if (sea[x][y].equals("#")) {
+                System.out.println("Oops! It looks like the Computer has hit its own ship!");
+                compShips--;
+                System.out.println("The Computer has "+ compShips +" ships left.");
+                userTurn = true;
+                sea[x][y] = "!";
+                printSea();
+            }
+            else {
+                System.out.println("Oops! It looks like the Computer missed! Better luck next time.");
+                userTurn = true;
+                sea[x][y] = "-";
                 printSea();
             }
         }
