@@ -6,20 +6,20 @@ import java.util.List;
 public class Battleship {
     private static String[][] sea = new String[10][10];
     public static String[][] comp = new String[10][10];
-//    public static ArrayList<String> playerSea = new ArrayList<String>();
-//    public static ArrayList<ArrayList<String>> compSea = new ArrayList<ArrayList<String>>(10);
+/*    public static ArrayList<String> playerSea = new ArrayList<String>();
+    public static ArrayList<ArrayList<String>> compSea = new ArrayList<ArrayList<String>>(10); */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("****Welcome to Battleships Game****");
         System.out.println();
         System.out.println("Right now, the sea is empty.");
         drawSea();
-//        generateCompBoard();
         System.out.println();
         System.out.println();
         System.out.println("Player 1 please prepare to deploy your ships: ");
         userShips();
         computerShips();
+        battle();
     }
 
     public static void drawSea() {
@@ -41,7 +41,12 @@ public class Battleship {
         for (int i = 0; i < sea.length; i++) {
             System.out.print(i + " |");
             for (int j = 0; j < sea[i].length; j++) {
-                System.out.print(sea[i][j]);
+                if (sea[i][j].equals("#")) {
+                    System.out.print(" ");
+                }
+                else {
+                    System.out.print(sea[i][j]);
+                }
             }
             System.out.print("| " + i);
             System.out.println();
@@ -119,65 +124,74 @@ public class Battleship {
         int userShips = 5;
         boolean userTurn = true;
         System.out.println("It's time for battle! Player, you will go first: ");
-        while (userTurn) {
-            System.out.println("Please select an x coordinate for your guess: ");
-            int px = input.nextInt();
-            System.out.println("Please select a y coordinate for your guess: ");
-            int py = input.nextInt();
 
-            if (sea[px][py].equals("#")) {
-                System.out.println("Direct hit! You have sunk one of the Computer's ships!");
-                compShips--;
-                System.out.println("The Computer has "+ compShips +" ships left.");
-                userTurn = false;
-                sea[px][py] = "!";
-                printSea();
+        if (compShips != 0 && userShips != 0) {
+            while (userTurn) {
+                System.out.println("Please select an x coordinate for your guess: ");
+                int px = input.nextInt();
+                System.out.println("Please select a y coordinate for your guess: ");
+                int py = input.nextInt();
+
+                if (sea[px][py].equals("#")) {
+                    System.out.println("Direct hit! You have sunk one of the Computer's ships!");
+                    compShips--;
+                    System.out.println("The Computer has " + compShips + " ships left.");
+                    userTurn = !userTurn;
+                    sea[px][py] = "!";
+                    printSea();
+                } else if (sea[px][py].equals("@")) {
+                    System.out.println("Oh no! You sunk your own ship!");
+                    userShips--;
+                    System.out.println("Player has " + userShips + " ships left.");
+                    userTurn = !userTurn;
+                    sea[px][py] = "X";
+                    printSea();
+                } else {
+                    System.out.println("Oops! It looks like you missed! Better luck next time.");
+                    userTurn = !userTurn;
+                    sea[px][py] = "-";
+                    printSea();
+                }
             }
-            else if (sea[px][py].equals("@")) {
-                System.out.println("Oh no! You sunk your own ship!");
-                userShips--;
-                System.out.println("Player has "+ userShips +" ships left.");
-                userTurn = false;
-                sea[px][py] = "X";
-                printSea();
-            }
-            else {
-                System.out.println("Oops! It looks like you missed! Better luck next time.");
-                userTurn = false;
-                sea[px][py] = "-";
-                printSea();
+            while (!userTurn) {
+                Random n = new Random();
+                System.out.println("It's time for the Computer to take their shot!");
+                System.out.println();
+                int x = n.nextInt(10);
+                int y = n.nextInt(10);
+                System.out.println("The computer chose (" + x + "," + y + ").");
+
+                if (sea[x][y].equals("@")) {
+                    System.out.println("Direct hit! The Player has lost a ship!");
+                    userShips--;
+                    System.out.println("Player has " + userShips + " ships left.");
+                    userTurn = !userTurn;
+                    sea[x][y] = "X";
+                    printSea();
+                } else if (sea[x][y].equals("#")) {
+                    System.out.println("Oops! It looks like the Computer has hit its own ship!");
+                    compShips--;
+                    System.out.println("The Computer has " + compShips + " ships left.");
+                    userTurn = !userTurn;
+                    sea[x][y] = "!";
+                    printSea();
+                } else {
+                    System.out.println("Oops! It looks like the Computer missed! Better luck next time.");
+                    userTurn = !userTurn;
+                    sea[x][y] = "-";
+                    printSea();
+                }
             }
         }
-        while (!userTurn) {
-            Random n = new Random();
-            System.out.println("It's time for the Computer to take their shot!");
+        else if (compShips == 0 && userShips > 0) {
+            System.out.println("The Player has won the game with "+ userShips +" ships remaining.");
             System.out.println();
-            int x = n.nextInt(10);
-            int y = n.nextInt(10);
-            System.out.println("The computer chose ("+ x +","+ y +").");
-
-            if (sea[x][y].equals("@")) {
-                System.out.println("Direct hit! The Player has lost a ship!");
-                userShips--;
-                System.out.println("Player has "+ userShips +" ships left.");
-                userTurn = true;
-                sea[x][y] = "X";
-                printSea();
-            }
-            else if (sea[x][y].equals("#")) {
-                System.out.println("Oops! It looks like the Computer has hit its own ship!");
-                compShips--;
-                System.out.println("The Computer has "+ compShips +" ships left.");
-                userTurn = true;
-                sea[x][y] = "!";
-                printSea();
-            }
-            else {
-                System.out.println("Oops! It looks like the Computer missed! Better luck next time.");
-                userTurn = true;
-                sea[x][y] = "-";
-                printSea();
-            }
+            System.out.println("Thanks for playing!");
+        }
+        else {
+            System.out.println("Oh no! The Computer is victorious with "+ compShips +" ships remaining.");
+            System.out.println();
+            System.out.println("Better luck next time!");
         }
     }
 
