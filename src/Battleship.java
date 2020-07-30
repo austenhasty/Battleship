@@ -157,6 +157,9 @@ public class Battleship {
             System.out.println("Player has " + userShips + " ships left.");
             sea[px][py] = "X";
             printSea();
+        } else if (sea[px][py].equals("!") || sea[px][py].equals("X") || sea[px][py].equals("-")) {
+            System.out.println("These coordinates have already been checked!");
+            System.out.println("Better luck next time!");
         } else {
             System.out.println("Oops! It looks like you missed! Better luck next time.");
             sea[px][py] = "-";
@@ -184,6 +187,9 @@ public class Battleship {
             System.out.println("The Computer has " + compShips + " ships left.");
             sea[x][y] = "!";
             printSea();
+        } else if (sea[x][y].equals("!") || sea[x][y].equals("X") || sea[x][y].equals("-")) {
+            System.out.println("These coordinates have already been checked!");
+            System.out.println("Better luck next time!");
         } else {
             System.out.println("Oops! It looks like the Computer missed! Better luck next time.");
             sea[x][y] = "-";
