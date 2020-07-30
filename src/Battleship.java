@@ -127,16 +127,7 @@ public class Battleship {
             userTurn();
             compTurn();
         }
-        if (compShips == 0 && userShips > 0) {
-            System.out.println("The Player has won the game with "+ userShips +" ships remaining.");
-            System.out.println();
-            System.out.println("Thanks for playing!");
-        }
-        else {
-            System.out.println("Oh no! The Computer is victorious with "+ compShips +" ships remaining.");
-            System.out.println();
-            System.out.println("Better luck next time!");
-        }
+        checkWin();
     }
     public static void userTurn() {
         Scanner input = new Scanner(System.in);
@@ -197,4 +188,16 @@ public class Battleship {
         }
     }
 
+    public static void checkWin() {
+        if (compShips == 0 && userShips > 0) {
+            System.out.println("The Player has won the game with "+ userShips +" ships remaining.");
+            System.out.println();
+            System.out.println("Thanks for playing!");
+        }
+        else {
+            System.out.println("Oh no! The Computer is victorious with "+ compShips +" ships remaining.");
+            System.out.println();
+            System.out.println("Better luck next time!");
+        }
+    }
 }
